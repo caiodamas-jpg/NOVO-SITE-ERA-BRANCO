@@ -1,0 +1,53 @@
+# ERA CX — Customer Engagement Platform
+
+> Plataforma omnichannel completa para comunicação empresarial. Chat, Voz e IA integrados.
+
+ERA é uma plataforma brasileira de comunicação omnichannel que unifica atendimento por mensagens (WhatsApp, Instagram, Telegram, SMS, RCS, Email), telefonia em nuvem (PABX, URA, Call Center, Discador) e inteligência artificial em uma única solução.
+
+## Produtos
+
+### ERA Chat
+Atendimento inteligente por mensagens. WhatsApp Business API oficial (Meta), Instagram, Messenger, Telegram, LiveChat, SMS, RCS e Email — tudo em um único painel com chatbot, IA generativa e automações.
+
+### ERA Voz
+PABX em nuvem completo com URA inteligente, call center, discador preditivo, gravação de chamadas com transcrição por IA, monitoramento em tempo real e relatórios detalhados.
+
+### ERA Omni
+Plataforma omnichannel que unifica voz e chat em uma experiência consistente. Dashboard consolidado, gestão de equipes, IA e análise avançada para grandes operações.
+
+## Plataforma
+
+- **Flows**: Editor visual de workflows com 70+ tipos de nós, triggers por webhook e cron
+- **CRM Integrado**: Pipeline Kanban, leads, contatos, produtos, cotações, faturas e gamificação
+- **Tickets & Helpdesk**: Sistema completo com SLA, automação, Kanban, merge e bulk actions
+- **Portal do Desenvolvedor**: APIs RESTful, SDKs em 6 linguagens, webhooks e sandbox
+- **Marketplace**: Integrações com n8n, Zapier e Make
+- **Analytics & BI**: Forecast de vendas, relatórios e dashboards em tempo real
+- **Pesquisas CSAT/NPS**: Editor de pesquisas, dashboards separados, envio automático
+
+## Integrações
++50 CRMs e ERPs integrados: Salesforce, HubSpot, Zendesk, PipeDrive, Totvs, Bitrix, Zoho, RD Station, IXC, MK Solutions, Movidesk, Kommo e mais.
+
+## Números
+- 335+ empresas ativas
+- 12 canais integrados
+- 99.9% de uptime
+- 24/7 IA disponível
+
+## Certificações
+- Meta Business Partner (API oficial do WhatsApp)
+- GPTW — 73ª melhor empresa do Brasil
+- Google 4.9 — melhor reputação no segmento
+
+## Responsabilidade Social
+Há mais de 4 anos, a ERA doa infraestrutura e software para o CVV (Centro de Valorização da Vida), apoiando 3 milhões de atendimentos anuais de apoio emocional pelo 188.
+
+## Links
+- Site: https://eracx.com.br
+- Blog: https://blog.eracx.com.br
+- Planos: https://eracx.com.br/pt/planos
+- Integrações: https://eracx.com.br/pt/integracoes
+- CVV: https://eracx.com.br/pt/institucional/cvv
+
+## Contato
+R. Miguel Pascoal, 104 - 1º andar, Jardim do Trevo, Campinas - SP, 13041-312
