@@ -565,7 +565,7 @@ export function AISection() {
             <a
               href="#lead-capture"
               className="px-6 py-3 md:px-8 md:py-3.5 rounded-lg hover:brightness-110 transition-all text-sm font-medium inline-flex items-center gap-2 text-center min-w-[200px] justify-center"
-              style={{ backgroundColor: "#f97316", color: "#ffffff" }}
+              style={{ backgroundColor: "#cfff00", color: "#1a2429" }}
             >
               Solicitar cotação
               <ChevronRight className="w-4 h-4" />

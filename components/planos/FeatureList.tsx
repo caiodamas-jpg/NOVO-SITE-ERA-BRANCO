@@ -31,7 +31,7 @@ export default function FeatureList({ features, initialVisible = 6, label }: Fea
             <span>
               {getFeatureText(feature)}
               {isAddon(feature) && (
-                <span className="ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold uppercase bg-orange-500/15 text-orange-400">
+                <span className="ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold uppercase bg-[#cfff00]/15 text-[#cfff00]">
                   ADDON
                 </span>
               )}

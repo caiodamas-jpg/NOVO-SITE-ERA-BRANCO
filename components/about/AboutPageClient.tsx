@@ -218,7 +218,7 @@ export default function AboutPageClient() {
                 <a
                   href="/#lead-capture"
                   className="px-8 py-4 rounded-lg font-medium text-base text-white hover:brightness-110 transition-all"
-                  style={{ backgroundColor: "#f97316" }}
+                  style={{ backgroundColor: "#cfff00" }}
                 >
                   Agendar demonstração
                 </a>

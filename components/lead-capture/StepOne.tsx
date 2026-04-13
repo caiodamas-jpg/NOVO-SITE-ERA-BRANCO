@@ -46,7 +46,7 @@ export default function StepOne({ onSubmit, loading, error }: StepOneProps) {
     })
   }
 
-  const inputClass = "w-full h-11 px-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316]/30 transition-colors"
+  const inputClass = "w-full h-11 px-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-[#cfff00] focus:ring-1 focus:ring-[#cfff00]/30 transition-colors"
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -77,8 +77,8 @@ export default function StepOne({ onSubmit, loading, error }: StepOneProps) {
       {error && <p className="text-red-400 text-xs">{error}</p>}
 
       <button type="submit" disabled={loading}
-        className="w-full h-11 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 text-white hover:brightness-110 cursor-pointer"
-        style={{ backgroundColor: "#f97316" }}>
+        className="w-full h-11 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 text-[#1a2429] hover:brightness-110 cursor-pointer"
+        style={{ backgroundColor: "#cfff00" }}>
         {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : (
           <>
             Agendar minha demonstração

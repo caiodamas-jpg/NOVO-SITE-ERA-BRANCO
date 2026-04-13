@@ -157,7 +157,7 @@ Atendente: Perfeito! Todas as chamadas são gravadas automaticamente e nossa IA 
           <div className="flex items-center gap-2 mt-4">
             <span className="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs">Sentimento: Positivo</span>
             <span className="px-2 py-1 rounded bg-purple-500/20 text-purple-400 text-xs">Tema: Vendas</span>
-            <span className="px-2 py-1 rounded bg-orange-500/20 text-orange-400 text-xs">Lead Qualificado</span>
+            <span className="px-2 py-1 rounded bg-[#cfff00]/20 text-[#cfff00] text-xs">Lead Qualificado</span>
           </div>
         </div>
       </div>
@@ -219,7 +219,7 @@ export function ProductDirectionSection() {
           <a
             href="#lead-capture"
             className="px-6 py-3 md:px-8 md:py-3.5 rounded-lg hover:brightness-110 transition-all text-sm font-medium inline-flex items-center gap-2 text-center min-w-[200px] justify-center"
-            style={{ backgroundColor: "#f97316", color: "#ffffff" }}
+            style={{ backgroundColor: "#cfff00", color: "#1a2429" }}
           >
             Solicitar cotação
             <ChevronRight className="w-4 h-4" />

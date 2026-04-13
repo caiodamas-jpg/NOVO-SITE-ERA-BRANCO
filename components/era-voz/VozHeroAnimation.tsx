@@ -28,7 +28,7 @@ function DashboardFilaScreen() {
           <p className="text-[6px] text-zinc-500 uppercase mb-1">Agente</p>
           <div className="relative w-16 h-16">
             <svg viewBox="0 0 36 36" className="w-full h-full">
-              <circle cx="18" cy="18" r="15" fill="none" stroke="#f97316" strokeWidth="6" strokeDasharray="75 25" strokeDashoffset="25" />
+              <circle cx="18" cy="18" r="15" fill="none" stroke="#cfff00" strokeWidth="6" strokeDasharray="75 25" strokeDashoffset="25" />
               <circle cx="18" cy="18" r="15" fill="none" stroke="#22c55e" strokeWidth="6" strokeDasharray="0 100" strokeDashoffset="0" />
               <circle cx="18" cy="18" r="15" fill="none" stroke="#ef4444" strokeWidth="6" strokeDasharray="25 75" strokeDashoffset="0" />
             </svg>

@@ -132,9 +132,9 @@ const pages: Record<string, {
     title: "Pesquisas CSAT/NPS",
     subtitle: "Editor de pesquisas, dashboards de CSAT e NPS, analytics e envio automático",
     description: "Sistema completo de pesquisas com editor visual, dashboards separados para CSAT e NPS, analytics de resultados, lista de pesquisas ativas e envio automático ao final de cada atendimento. Worker dedicado para processamento de respostas em background.",
-    accentColor: "#f97316",
-    accentLight: "rgba(249, 115, 22, 0.1)",
-    heroGradient: "linear-gradient(135deg, #2b363d 0%, #431407 50%, #7c2d12 100%)",
+    accentColor: "#cfff00",
+    accentLight: "rgba(207, 255, 0, 0.1)",
+    heroGradient: "linear-gradient(135deg, #2b363d 0%, #2b363d 50%, #3a4a54 100%)",
     features: [
       { title: "Editor de pesquisas", desc: "Crie pesquisas com perguntas de múltipla escolha, escala (1-5, 0-10) e texto livre." },
       { title: "Dashboard CSAT", desc: "Painel dedicado com CSAT médio, distribuição de notas, tendência e comparativo por período." },

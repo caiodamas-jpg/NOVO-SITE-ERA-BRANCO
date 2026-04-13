@@ -704,7 +704,7 @@ export const categoryColors: Record<IntegrationCategory, string> = {
   "Gestao de Tickets": "#06b6d4",
   "CRM de Condominio": "#ec4899",
   "CRM de Saude": "#14b8a6",
-  "CRM Automotivo": "#f97316",
+  "CRM Automotivo": "#cfff00",
   "Plataforma Colaborativa": "#6366f1",
   "Plataforma de Pagamento": "#a855f7",
 }

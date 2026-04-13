@@ -34,7 +34,7 @@ export default function DashboardPageClient() {
             <h1 className="text-3xl md:text-4xl lg:text-[48px] font-medium text-gray-900 mb-5" style={{ letterSpacing: "-0.0325em", lineHeight: 1.1, fontVariationSettings: '"opsz" 28' }}>{pageData.h1}</h1>
             <p className="text-gray-500 text-base max-w-2xl mb-8">{pageData.subtitle}</p>
             <div className="flex flex-wrap gap-3">
-              <button onClick={() => setModalOpen(true)} className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#f97316", color: "#ffffff" }}>Solicitar cotação</button>
+              <button onClick={() => setModalOpen(true)} className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#cfff00", color: "#1a2429" }}>Solicitar cotação</button>
               <Link href="/pricing#era-omni" className="px-4 py-2 md:px-5 md:py-2.5 border border-gray-300 text-gray-900 font-medium rounded-lg hover:bg-gray-100 transition-colors text-xs md:text-sm">Ver planos Omnichannel</Link>
             </div>
           </motion.div>

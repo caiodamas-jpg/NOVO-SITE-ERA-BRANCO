@@ -62,7 +62,7 @@ export function CoExSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 rounded-lg font-medium text-base hover:brightness-110 transition-all inline-flex items-center gap-2 text-white"
-                  style={{ backgroundColor: "#f97316" }}
+                  style={{ backgroundColor: "#cfff00" }}
                 >
                   Ver planos e preços
                   <ChevronRight className="w-4 h-4" />

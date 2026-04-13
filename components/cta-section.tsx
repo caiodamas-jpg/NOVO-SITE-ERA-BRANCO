@@ -53,7 +53,7 @@ export function CTASection() {
         </div>
 
         <div className="flex items-center justify-center gap-3">
-          <a href="#lead-capture" className="px-4 py-2 md:px-5 md:py-2.5 font-medium rounded-lg text-white transition-all hover:brightness-110 text-xs md:text-sm" style={{ backgroundColor: "#f97316" }}>
+          <a href="#lead-capture" className="px-4 py-2 md:px-5 md:py-2.5 font-medium rounded-lg text-[#1a2429] transition-all hover:brightness-110 text-xs md:text-sm" style={{ backgroundColor: "#cfff00" }}>
             {t("sales")}
           </a>
           <a href="#lead-capture" className="px-4 py-2 md:px-5 md:py-2.5 font-medium rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm bg-white text-gray-900">

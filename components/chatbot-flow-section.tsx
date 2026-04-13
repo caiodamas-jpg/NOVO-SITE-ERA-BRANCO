@@ -440,7 +440,7 @@ export function ChatbotFlowSection() {
           <a
             href="#lead-capture"
             className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium inline-flex items-center gap-2"
-            style={{ backgroundColor: "#f97316", color: "#ffffff" }}
+            style={{ backgroundColor: "#cfff00", color: "#1a2429" }}
           >
             Solicitar cotação
             <ChevronRight className="w-4 h-4" />

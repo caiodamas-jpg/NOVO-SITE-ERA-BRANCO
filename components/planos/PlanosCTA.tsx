@@ -21,7 +21,7 @@ export default function PlanosCTA() {
           <WhatsAppLink
             message="Olá, gostaria de falar com um especialista ERA sobre planos"
             className="px-5 py-2.5 font-medium rounded-lg hover:opacity-90 transition-opacity text-sm inline-flex items-center gap-2"
-            style={{ backgroundColor: "#f97316", color: "#ffffff" }}
+            style={{ backgroundColor: "#cfff00", color: "#1a2429" }}
           >
             Agendar demonstração
           </WhatsAppLink>

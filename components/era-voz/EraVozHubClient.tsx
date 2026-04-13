@@ -50,7 +50,7 @@ export default function EraVozHubClient() {
               PABX virtual completo na nuvem: ramais ilimitados, URA inteligente multinível, call center com filas, discador preditivo, gravação e monitoramento — sem hardware, sem manutenção.
             </p>
             <div className="flex flex-wrap gap-3 mb-12">
-              <button onClick={() => setModalOpen(true)} className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#f97316", color: "#ffffff" }}>Solicitar cotação</button>
+              <button onClick={() => setModalOpen(true)} className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#cfff00", color: "#1a2429" }}>Solicitar cotação</button>
               <Link href="/pricing#era-voz" className="px-4 py-2 md:px-5 md:py-2.5 border border-gray-300 text-gray-900 font-medium rounded-lg hover:bg-gray-100 transition-colors text-xs md:text-sm">Ver planos Voz</Link>
             </div>
             <div className="flex flex-wrap gap-6">
@@ -124,7 +124,7 @@ export default function EraVozHubClient() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-medium text-gray-900 mb-4" style={{ letterSpacing: "-0.0325em" }}>Pronto para modernizar sua operação de voz?</h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
-            <button onClick={() => setModalOpen(true)} className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#f97316", color: "#ffffff" }}>Solicitar cotação</button>
+            <button onClick={() => setModalOpen(true)} className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#cfff00", color: "#1a2429" }}>Solicitar cotação</button>
             <Link href="/pricing#era-voz" className="px-4 py-2 md:px-5 md:py-2.5 border border-gray-300 text-gray-900 font-medium rounded-lg hover:bg-gray-100 transition-colors text-xs md:text-sm">Ver planos Voz</Link>
           </div>
           <p className="text-gray-500 text-xs mt-4">Ou <Link href="/pricing#era-omni" className="text-gray-900 underline underline-offset-2 hover:opacity-80">conheça o Omnichannel para unificar voz e chat</Link></p>

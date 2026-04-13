@@ -42,7 +42,7 @@ export default function EraOmniHubClient() {
               Unifique voz, WhatsApp, Instagram, Messenger, Telegram, e-mail, LiveChat e mais 5 canais em uma plataforma com histórico único do cliente, transição transparente entre canais, IA que analisa a qualidade do atendimento e personalização completa.
             </p>
             <div className="flex flex-wrap gap-3 mb-14">
-              <button onClick={() => setModalOpen(true)} className="px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm font-medium" style={{ backgroundColor: "#f97316", color: "#ffffff" }}>Solicitar cotação</button>
+              <button onClick={() => setModalOpen(true)} className="px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm font-medium" style={{ backgroundColor: "#cfff00", color: "#1a2429" }}>Solicitar cotação</button>
               <Link href="/pricing#era-omni" className="px-5 py-2.5 border border-gray-300 text-gray-900 font-medium rounded-lg hover:bg-gray-100 transition-colors text-sm">Ver planos Omnichannel</Link>
             </div>
             <div className="flex flex-wrap gap-8">
@@ -91,7 +91,7 @@ export default function EraOmniHubClient() {
           <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
             <Link href="/era-chat" className="text-xs text-white/50 hover:text-white transition-colors">Conheça o Chat →</Link>
             <Link href="/era-voz" className="text-xs text-white/50 hover:text-white transition-colors">Conheça o Voz →</Link>
-            <button onClick={() => setModalOpen(true)} className="px-4 py-2 rounded-lg text-xs font-medium" style={{ backgroundColor: "#f97316", color: "#ffffff" }}>Solicitar cotação Omnichannel</button>
+            <button onClick={() => setModalOpen(true)} className="px-4 py-2 rounded-lg text-xs font-medium" style={{ backgroundColor: "#cfff00", color: "#1a2429" }}>Solicitar cotação Omnichannel</button>
           </div>
         </div>
       </section>
@@ -136,7 +136,7 @@ export default function EraOmniHubClient() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-medium text-gray-900 mb-4" style={{ letterSpacing: "-0.0325em" }}>Pronto para unificar sua operação?</h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
-            <button onClick={() => setModalOpen(true)} className="px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm font-medium" style={{ backgroundColor: "#f97316", color: "#ffffff" }}>Solicitar cotação</button>
+            <button onClick={() => setModalOpen(true)} className="px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm font-medium" style={{ backgroundColor: "#cfff00", color: "#1a2429" }}>Solicitar cotação</button>
             <Link href="/pricing#era-omni" className="px-5 py-2.5 border border-gray-300 text-gray-900 font-medium rounded-lg hover:bg-gray-100 transition-colors text-sm">Ver planos Omnichannel</Link>
           </div>
         </div>

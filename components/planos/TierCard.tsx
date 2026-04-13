@@ -47,7 +47,7 @@ export default function TierCard({ tier, onRequestQuote }: TierCardProps) {
         }`}
         style={
           tier.highlighted
-            ? { backgroundColor: "#f97316", color: "#ffffff" }
+            ? { backgroundColor: "#cfff00", color: "#1a2429" }
             : undefined
         }
       >

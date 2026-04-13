@@ -7,6 +7,7 @@ import dynamic from "next/dynamic"
 import { Navbar } from "./navbar"
 import { HeroAnimation } from "./hero-animation"
 
+
 // Lazy load all below-fold sections
 const FeatureCardsSection = dynamic(() => import("./feature-cards-section").then(m => ({ default: m.FeatureCardsSection })), { ssr: false })
 const LogoCloud = dynamic(() => import("./logo-cloud").then(m => ({ default: m.LogoCloud })), { ssr: false })
@@ -59,18 +60,6 @@ function HeroRotatingWord() {
 
 export function Hero3DStage() {
   const t = useTranslations("hero")
-  const [yOffset, setYOffset] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      const offset = Math.min(scrollY / 300, 1) * -20
-      setYOffset(offset)
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   return (
     <>
@@ -150,14 +139,7 @@ export function Hero3DStage() {
                 background: "linear-gradient(to top, #f4f5f7 0%, rgba(244, 245, 247, 0.9) 50%, transparent 100%)",
               }}
             />
-            <div
-              style={{
-                transform: `translateY(${yOffset}px)`,
-                transition: "transform 0.1s ease-out",
-              }}
-            >
-              <HeroAnimation />
-            </div>
+            <HeroAnimation />
           </div>
 
           <FeatureCardsSection />

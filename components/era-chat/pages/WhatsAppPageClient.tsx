@@ -177,7 +177,7 @@ export default function WhatsAppPageClient() {
                 <button onClick={() => setModalOpen(true)} className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#2b363d", color: "#ffffff" }}>
                   Solicitar cotação
                 </button>
-                <Link href="/pricing#era-chat" className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#f97316", color: "#ffffff" }}>
+                <Link href="/pricing#era-chat" className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg hover:opacity-90 transition-opacity text-xs md:text-sm font-medium" style={{ backgroundColor: "#cfff00", color: "#1a2429" }}>
                   Ver planos Chat
                 </Link>
               </div>

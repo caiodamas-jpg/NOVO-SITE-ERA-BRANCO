@@ -1,273 +1,281 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
+import { useState, useEffect, useRef, useCallback } from "react"
+import "./hero-animation.css"
 
-const menuItems = [
-  { key: "home", name: "Home", icon: "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" },
-  { key: "omnichannel", name: "Omnichannel", icon: "M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" },
-  { key: "pabx", name: "PABX", icon: "M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" },
-  { key: "dashboards", name: "Dashboards", icon: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" },
-]
+const WAVEFORM_BARS = [30, 55, 80, 45, 90, 60, 35, 75, 50, 85, 40, 65, 25, 70, 55, 80, 35]
+const ANALYTICS_BARS = [25, 50, 75, 100, 60, 90, 45, 80, 55, 70]
 
-// === HOME SCREEN ===
-function HomeScreen() {
-  return (
-    <div className="p-3 space-y-3">
-      {/* Agentes de IA */}
-      <div className="flex gap-3">
-        <div className="flex-1 rounded-lg p-3 bg-gradient-to-r from-emerald-900/40 to-emerald-800/20 border border-emerald-800/30">
-          <p className="text-[9px] font-bold text-white mb-1">Agentes de IA</p>
-          <p className="text-[7px] text-zinc-400 mb-2">Respostas rápidas e precisas com base no histórico do cliente</p>
-          <div className="flex gap-1.5">
-            <span className="px-1.5 py-0.5 rounded text-[6px] font-medium" style={{ backgroundColor: "#cfff00", color: "#1a1a1a" }}>Criar agentes</span>
-            <span className="px-1.5 py-0.5 rounded text-[6px] border border-zinc-600 text-zinc-400">Saiba mais</span>
-          </div>
-        </div>
-        {/* Call Center mini */}
-        <div className="w-36 rounded-lg p-2.5 border border-zinc-800/50 bg-zinc-900/30">
-          <p className="text-[8px] font-bold text-white mb-2">Call Center</p>
-          <div className="grid grid-cols-2 gap-1">
-            {[{ n: "5000", l: "Recebidas" }, { n: "4000", l: "Atendidas" }, { n: "1000", l: "Abandonadas" }, { n: "80%", l: "Sucesso" }].map((s) => (
-              <div key={s.l} className="text-center">
-                <p className="text-[8px] font-bold text-white">{s.n}</p>
-                <p className="text-[5px] text-zinc-500">{s.l}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      {/* Mensageria */}
-      <div className="rounded-lg p-3 border border-zinc-800/50 bg-zinc-900/30">
-        <p className="text-[8px] font-bold text-white mb-2">Mensageria</p>
-        <div className="flex gap-3 flex-wrap">
-          {[{ n: "300", l: "Enviadas" }, { n: "300", l: "Chats ativos" }, { n: "300", l: "Concluidos" }, { n: "300", l: "Templates" }].map((s) => (
-            <div key={s.l}>
-              <p className="text-[9px] font-bold text-white">{s.n}</p>
-              <p className="text-[6px] text-zinc-500">{s.l}</p>
-            </div>
-          ))}
-        </div>
-        <div className="flex items-center gap-3 mt-2">
-          {[{ icon: "whatsapp", color: "#25D366" }, { icon: "messenger", color: "#0084FF" }, { icon: "instagram", color: "#E1306C" }, { icon: "email", color: "#EA4335" }, { icon: "telegram", color: "#0088CC" }].map((ch) => (
-            <div key={ch.icon} className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: ch.color + "30" }} />
-              <span className="text-[6px] text-zinc-500">300</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* Atalhos */}
-      <div className="grid grid-cols-4 gap-1.5">
-        {["Ajuda", "Dashboards", "Relatorios", "Teste de rede"].map((a) => (
-          <div key={a} className="rounded-md p-2 border border-zinc-800/40 bg-zinc-900/20 text-center">
-            <p className="text-[6px] text-zinc-400">{a}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+/* ─── SVG Icons ─── */
+const WaPhoneSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.57-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/></svg>
+)
+
+const PersonSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+)
+
+const PhoneCallSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/></svg>
+)
+
+const PhoneHangUpSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08a.956.956 0 010-1.36C3.42 8.65 7.46 7 12 7s8.58 1.65 11.71 4.72c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.1-.7-.28-.79-.74-1.68-1.36-2.66-1.85a.993.993 0 01-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+)
+
+const InstagramSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+)
+
+const MessengerSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.2 5.42 3.15 7.2.16.15.26.36.27.58l.05 1.82c.02.56.6.93 1.11.7l2.03-.9c.17-.08.36-.1.55-.06.93.25 1.92.39 2.84.39 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2zm5.89 7.55l-2.88 4.57c-.46.73-1.44.91-2.12.39l-2.29-1.72a.6.6 0 00-.72 0l-3.09 2.34c-.41.31-.95-.17-.67-.6l2.88-4.57c.46-.73 1.44-.91 2.12-.39l2.29 1.72a.6.6 0 00.72 0l3.09-2.34c.41-.31.95.17.67.6z"/></svg>
+)
+
+const TelegramSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+)
+
+type CSSVars = React.CSSProperties & {
+  "--depth"?: number
+  "--del"?: string
+  "--dur"?: string
 }
 
-// === OMNICHANNEL SCREEN ===
-function OmniScreen() {
-  return (
-    <div className="flex h-full" style={{ minHeight: 250 }}>
-      {/* Chat list */}
-      <div className="w-44 border-r border-zinc-800/40">
-        {[
-          { name: "Clara Santos", msg: "Ola, gostaria de saber...", ch: "#25D366", time: "12:45" },
-          { name: "Ricardo Oliveira", msg: "Preciso de ajuda com...", ch: "#E1306C", time: "13:01" },
-          { name: "Alexandre Silva", msg: "Boa tarde, tenho uma...", ch: "#EA4335", time: "13:05" },
-        ].map((c, i) => (
-          <div key={c.name} className={`flex items-start gap-1.5 px-2 py-2 border-b border-zinc-800/30 ${i === 0 ? "bg-zinc-800/40" : ""}`}>
-            <div className="w-6 h-6 rounded-full bg-zinc-700 shrink-0" />
-            <div className="min-w-0 flex-1">
-              <div className="flex justify-between">
-                <span className="text-[8px] text-white font-medium truncate">{c.name}</span>
-                <span className="text-[6px] text-zinc-600">{c.time}</span>
-              </div>
-              <p className="text-[7px] text-zinc-500 truncate">{c.msg}</p>
-              <div className="flex items-center gap-1 mt-0.5">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: c.ch + "30" }} />
-                <span className="text-[6px] text-zinc-600">Aguardando</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      {/* Conversation */}
-      <div className="flex-1 p-2.5 space-y-2">
-        <div className="max-w-[80%]">
-          <span className="text-[6px] font-bold" style={{ color: "#cfff00" }}>BOT</span>
-          <div className="mt-0.5 px-2 py-1.5 rounded-md text-[8px] text-zinc-200" style={{ background: "rgba(147,197,253,0.12)" }}>
-            Claro, estou direcionando para um atendente. Mas caso precise, estou sempre aqui!
-          </div>
-        </div>
-        <div className="ml-auto max-w-[75%]">
-          <div className="px-2 py-1.5 rounded-md text-[8px] text-zinc-900" style={{ background: "#e8ecf0" }}>
-            Ola! Sou a Leticia e vou fazer seu atendimento.
-          </div>
-        </div>
-        <div className="max-w-[70%]">
-          <div className="px-2 py-1.5 rounded-md text-[8px] text-zinc-300" style={{ background: "rgba(255,255,255,0.06)" }}>
-            Gostaria de entender meu plano
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// === PABX SCREEN ===
-function PabxScreen() {
-  return (
-    <div className="p-3 space-y-3">
-      {/* Stats grid */}
-      <div className="grid grid-cols-4 gap-2">
-        {[
-          { n: "23", l: "CHAMADAS TOTAIS" },
-          { n: "10", l: "TOTAL ENTRADA" },
-          { n: "5", l: "ATENDIDA" },
-          { n: "5", l: "NAO ATENDIDA" },
-        ].map((s) => (
-          <div key={s.l} className="rounded-md p-2 border border-zinc-800/40 bg-zinc-900/30 text-center">
-            <p className="text-[10px] font-bold text-white">{s.n}</p>
-            <p className="text-[5px] text-zinc-500 uppercase">{s.l}</p>
-          </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-3 gap-2">
-        {[{ n: "13", l: "TOTAL SAIDA" }, { n: "4", l: "ATENDIDA" }, { n: "9", l: "NAO ATENDIDA" }].map((s) => (
-          <div key={s.l} className="rounded-md p-2 border border-zinc-800/40 bg-zinc-900/30 text-center">
-            <p className="text-[9px] font-bold text-white">{s.n}</p>
-            <p className="text-[5px] text-zinc-500 uppercase">{s.l}</p>
-          </div>
-        ))}
-      </div>
-      {/* Table */}
-      <div className="rounded-md border border-zinc-800/40 overflow-hidden">
-        <div className="grid grid-cols-6 gap-0 text-[6px] text-zinc-500 bg-zinc-800/30 px-2 py-1.5">
-          <span>Protocolo</span><span>Estado</span><span>Direcao</span><span>Origem</span><span>Destino</span><span>Tempo</span>
-        </div>
-        {[
-          { estado: "Nao Atendida", cor: "bg-red-500", dir: "Saida" },
-          { estado: "Nao Atendida", cor: "bg-red-500", dir: "Saida" },
-          { estado: "Atendida", cor: "bg-green-500", dir: "Saida" },
-          { estado: "Atendida", cor: "bg-green-500", dir: "Entrada" },
-        ].map((r, i) => (
-          <div key={i} className="grid grid-cols-6 gap-0 text-[6px] text-zinc-400 px-2 py-1.5 border-t border-zinc-800/30">
-            <span>20260330...</span>
-            <span className={`${r.cor} text-white text-[5px] px-1 py-0.5 rounded w-fit`}>{r.estado}</span>
-            <span className="text-blue-400">{r.dir}</span>
-            <span>1931990501</span>
-            <span>2420603106</span>
-            <span className={r.estado === "Atendida" ? "text-green-400" : "text-red-400"}>00:00:{i + 13}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-// === DASHBOARDS SCREEN ===
-function DashboardsScreen() {
-  return (
-    <div className="p-3 space-y-3">
-      {/* Header */}
-      <div className="rounded-lg p-2.5 border border-zinc-800/40 bg-zinc-900/30">
-        <p className="text-[8px] font-bold text-white mb-2">Uso do WhatsApp no seu Time</p>
-        <div className="grid grid-cols-4 gap-2">
-          {[
-            { n: "129", l: "Conversas", color: "#cfff00" },
-            { n: "2.711", l: "Mensagens" },
-            { n: "1h 4m", l: "1a Resposta" },
-            { n: "45 min", l: "Tempo Medio" },
-          ].map((s) => (
-            <div key={s.l}>
-              <p className="text-[9px] font-bold" style={{ color: s.color || "#fff" }}>{s.n}</p>
-              <p className="text-[5px] text-zinc-500">{s.l}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* Chart + Activity */}
-      <div className="flex gap-2">
-        <div className="flex-1 rounded-lg p-2.5 border border-zinc-800/40 bg-zinc-900/30">
-          <p className="text-[7px] font-bold text-white mb-2">Volume de Atendimentos por Dia</p>
-          {/* Mini chart */}
-          <div className="flex items-end gap-0.5 h-12">
-            {[24, 34, 25, 28, 21, 30, 31, 41, 35, 8, 8, 7, 7, 7].map((v, i) => (
-              <div key={i} className="flex-1 rounded-t" style={{ height: `${(v / 41) * 100}%`, backgroundColor: i < 9 ? "#0088CC" : "#0088CC50" }} />
-            ))}
-          </div>
-          <div className="flex justify-between mt-1">
-            <span className="text-[5px] text-zinc-600">Min: 1</span>
-            <span className="text-[5px] text-zinc-600">Media: 19</span>
-            <span className="text-[5px] text-zinc-600">Total: 316</span>
-          </div>
-        </div>
-        <div className="w-28 rounded-lg p-2.5 border border-zinc-800/40 bg-zinc-900/30">
-          <p className="text-[7px] font-bold text-white mb-2">Atividade Recente</p>
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-start gap-1 mb-1.5">
-              <div className="w-3 h-3 rounded-full bg-zinc-700 shrink-0 mt-0.5" />
-              <p className="text-[5px] text-zinc-500">usuario recebeu mensagem de Era Mkt</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* Users */}
-      <div className="rounded-lg p-2.5 border border-zinc-800/40 bg-zinc-900/30">
-        <p className="text-[7px] font-bold text-white mb-1.5">Detalhamento do Usuario</p>
-        <div className="grid grid-cols-5 text-[5px] text-zinc-500 mb-1">
-          <span>Usuario</span><span>Atendimentos</span><span>Enviadas</span><span>Recebidas</span><span>Tempo</span>
-        </div>
-        {[{ name: "grasiela.machado", a: "104", e: "808", r: "1044" }, { name: "vinicius.silva", a: "25", e: "379", r: "474" }].map((u) => (
-          <div key={u.name} className="grid grid-cols-5 text-[6px] text-zinc-400 py-1 border-t border-zinc-800/20">
-            <span className="truncate">{u.name}</span>
-            <span className="text-green-400">{u.a}</span>
-            <span className="text-green-400">{u.e}</span>
-            <span>{u.r}</span>
-            <span>48:09</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-const screens: Record<string, () => React.ReactNode> = {
-  home: HomeScreen,
-  omnichannel: OmniScreen,
-  pabx: PabxScreen,
-  dashboards: DashboardsScreen,
-}
+const CANVAS_W = 1100
+const CANVAS_H = 440
 
 export function HeroAnimation() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const [scale, setScale] = useState(1)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % menuItems.length)
-    }, 4000)
-    return () => clearInterval(interval)
+    const wrapper = wrapperRef.current
+    if (!wrapper) return
+    const ro = new ResizeObserver(([entry]) => {
+      const w = entry.contentRect.width
+      setScale(Math.min(w / CANVAS_W, 1))
+    })
+    ro.observe(wrapper)
+    return () => ro.disconnect()
   }, [])
 
-  const activeKey = menuItems[activeIndex].key
-  const ActiveScreen = screens[activeKey]
+  useEffect(() => {
+    const el = canvasRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = canvasRef.current
+    if (!el) return
+    requestAnimationFrame(() => {
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2
+      el.style.setProperty("--mx", x.toFixed(3))
+      el.style.setProperty("--my", y.toFixed(3))
+    })
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    const el = canvasRef.current
+    if (!el) return
+    el.style.setProperty("--mx", "0")
+    el.style.setProperty("--my", "0")
+  }, [])
+
+  const cls = `hero-canvas ${isVisible ? "is-visible" : ""}`
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="overflow-hidden bg-white"
+    <div ref={wrapperRef} className="hero-animation-wrapper" style={{ height: CANVAS_H * scale }}>
+      <div
+        className={cls}
+        ref={canvasRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ transform: `scale(${scale})` }}
       >
-        <Image src="/img/home.png" alt="ERA CX Platform" width={1920} height={1080} className="w-full h-auto" priority />
-      </motion.div>
+
+      {/* 1. CODE TERMINAL */}
+      <div className="hero-parallax" style={{ "--depth": 3, zIndex: 2 } as CSSVars}>
+        <div className="hero-entrance slide-up" style={{ "--del": "0s", "--dur": "0.9s" } as CSSVars}>
+          <div className="code-terminal">
+            <div className="code-header">
+              <span className="code-dot" /><span className="code-dot" /><span className="code-dot" />
+            </div>
+            <div className="code-body">
+              <span className="kw">const</span>{" "}<span className="prop">opcoesDeChamada</span>{" = {\n"}
+              {"  "}<span className="prop">numeroOrigem</span>{": "}<span className="str">{`'+5511987654321'`}</span>{", "}<span className="cmt">{"// Seu numero que"}</span>{"\n"}
+              {"  "}<span className="cmt">iniciara a chamada</span>{"\n"}
+              {"  "}<span className="prop">numeroDestino</span>{": "}<span className="str">{`'+5511998765432'`}</span>{", "}<span className="cmt">{"// Numero do"}</span>{"\n"}
+              {"  "}<span className="cmt">destinatario da chamada</span>{"\n"}
+              {"  "}<span className="prop">urlWebhook</span>{": "}<span className="str">{`'https://meuservidor.com/webhook'`}</span>{" "}<span className="cmt">{"// URL para"}</span>{"\n"}
+              {"  "}<span className="cmt">receber eventos da chamada</span>{"\n"}
+              {"};\n\n"}
+              <span className="kw">function</span>{" "}<span className="fn">iniciarChamada</span>{"(opcoes) {\n"}
+              {"  vozClient.chamadas.criar(opcoes)\n"}
+              {"    .then(resposta => {"}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. AUDIO PLAYER */}
+      <div className="hero-parallax" style={{ "--depth": 5, zIndex: 6 } as CSSVars}>
+        <div className="hero-entrance fade-slide-down" style={{ "--del": "0.5s", "--dur": "0.7s" } as CSSVars}>
+          <div className="audio-player">
+            <div className="play-btn" />
+            <div className="waveform">
+              {WAVEFORM_BARS.map((h, i) => <span key={i} style={{ height: `${h}%` }} />)}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. FLOWCHART */}
+      <div className="hero-parallax" style={{ "--depth": 2, zIndex: 3 } as CSSVars}>
+        <div className="hero-entrance scale-up" style={{ "--del": "1.1s", "--dur": "0.8s" } as CSSVars}>
+          <div className="flowchart-card">
+            <div className="flow-titlebar" />
+            <div className="flow-grid">
+              <div className="flow-node flow-node-wa"><WaPhoneSvg /></div>
+              <div className="flow-connector flow-connector-h" />
+              <div className="flow-node flow-node-instagram"><InstagramSvg /></div>
+
+              <div className="flow-connector flow-connector-v" />
+              <div className="flow-connector flow-connector-cross" />
+              <div className="flow-connector flow-connector-v" />
+
+              <div className="flow-node flow-node-telegram"><TelegramSvg /></div>
+              <div className="flow-connector flow-connector-h" />
+              <div className="flow-node flow-node-messenger"><MessengerSvg /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 4. WHATSAPP CARD */}
+      <div className="hero-parallax" style={{ "--depth": 8, zIndex: 8 } as CSSVars}>
+        <div className="hero-entrance drop-bounce" style={{ "--del": "1.7s", "--dur": "0.7s" } as CSSVars}>
+          <div className="whatsapp-card card">
+            <div className="wa-label">WhatsApp</div>
+            <div className="wa-row">
+              <div className="wa-icon"><WaPhoneSvg /></div>
+              <span className="wa-number">347892</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 5. EMAIL CARD */}
+      <div className="hero-parallax" style={{ "--depth": 7, zIndex: 7 } as CSSVars}>
+        <div className="hero-entrance slide-right" style={{ "--del": "2.1s", "--dur": "0.7s" } as CSSVars}>
+          <div className="email-section">
+            <div className="email-top">
+              <span className="email-dot" />
+              <span>login@minhaera.com</span>
+            </div>
+            <div className="email-card">
+              <div className="email-avatar"><PersonSvg /></div>
+              <div className="email-name">Ola Marina!</div>
+              <span className="email-cta">Experimente gratis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 6. CHAT NOTIFICATIONS */}
+      <div className="hero-parallax" style={{ "--depth": 4, zIndex: 1 } as CSSVars}>
+        <div className="hero-entrance cascade-down" style={{ "--del": "2.6s", "--dur": "0.85s" } as CSSVars}>
+          <div className="notifications-stack">
+            <div className="notif-card">
+              <div className="notif-icon notif-whatsapp"><WaPhoneSvg /></div>
+              <div className="notif-lines"><span /><span /></div>
+            </div>
+            <div className="notif-card">
+              <div className="notif-icon notif-instagram"><InstagramSvg /></div>
+              <div className="notif-lines"><span /><span /></div>
+            </div>
+            <div className="notif-card">
+              <div className="notif-icon notif-messenger"><MessengerSvg /></div>
+              <div className="notif-lines"><span /><span /></div>
+            </div>
+            <div className="notif-card">
+              <div className="notif-icon notif-telegram"><TelegramSvg /></div>
+              <div className="notif-lines"><span /><span /></div>
+            </div>
+            <div className="notif-card">
+              <div className="notif-icon notif-whatsapp"><WaPhoneSvg /></div>
+              <div className="notif-lines"><span /><span /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 7. ANALYTICS */}
+      <div className="hero-parallax" style={{ "--depth": 6, zIndex: 4 } as CSSVars}>
+        <div className="hero-entrance slide-up" style={{ "--del": "3.2s", "--dur": "0.7s" } as CSSVars}>
+          <div className="analytics-section">
+            <div className="analytics-labels"><span /><span style={{ width: "18%" }} /></div>
+            <div className="analytics-bars">
+              {ANALYTICS_BARS.map((h, i) => <span key={i} style={{ height: `${h}%` }} />)}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 8. FORM / INPUT */}
+      <div className="hero-parallax" style={{ "--depth": 6, zIndex: 5 } as CSSVars}>
+        <div className="hero-entrance slide-up" style={{ "--del": "3.6s", "--dur": "0.7s" } as CSSVars}>
+          <div className="form-card card">
+            <div className="form-title-lines"><span /><span /></div>
+            <div className="form-input">+55 X XXXX-XXXX</div>
+            <div className="form-subtitle" />
+            <div className="form-tags">
+              <div className="form-tag"><span className="form-tag-dot green" /><span className="form-tag-line" /></div>
+              <div className="form-tag"><span className="form-tag-dot gray" /><span className="form-tag-line" /></div>
+              <div className="form-tag"><span className="form-tag-dot green" /><span className="form-tag-line" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 9. MOBILE PHONE — GRAND FINALE */}
+      <div className="hero-parallax" style={{ "--depth": 12, zIndex: 9 } as CSSVars}>
+        <div className="hero-entrance slide-right-grand" style={{ "--del": "4.2s", "--dur": "1.0s" } as CSSVars}>
+          <div className="phone-wrapper">
+            <div className="phone-frame">
+              <div className="phone-screen">
+                <div className="phone-notch" />
+                <div className="phone-call-label">Chamada Recebida</div>
+                <div className="phone-call-sub">ERA</div>
+                <div className="phone-avatar"><PersonSvg /></div>
+                <div className="phone-actions">
+                  <div className="phone-action-btn small"><PersonSvg /></div>
+                  <div className="phone-action-btn small"><PersonSvg /></div>
+                  <div className="phone-action-btn decline"><PhoneHangUpSvg /></div>
+                  <div className="phone-action-btn accept"><PhoneCallSvg /></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
     </div>
   )
 }

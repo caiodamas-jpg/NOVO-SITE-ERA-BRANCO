@@ -77,7 +77,7 @@ export default function IntegrationHero({ onSearch }: IntegrationHeroProps) {
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="w-2 h-2 rounded-full bg-orange-500" />
+            <div className="w-2 h-2 rounded-full bg-[#cfff00]" />
             <span className="text-sm text-gray-500">Integrações</span>
           </div>
 

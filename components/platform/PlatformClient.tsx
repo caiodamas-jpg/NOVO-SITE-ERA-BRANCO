@@ -191,7 +191,7 @@ export function PlatformClient() {
             t("prodCoreFeat4"),
           ],
           href: "#coremetrics",
-          color: "#f97316",
+          color: "#cfff00",
         },
         {
           name: "Studio Pro",
@@ -617,7 +617,7 @@ export function PlatformClient() {
                 { name: "WabaHub", icon: Send, color: "#22c55e" },
                 { name: "AppComHub", icon: Workflow, color: "#f59e0b" },
                 { name: "AppComm Chat", icon: Headphones, color: "#6366f1" },
-                { name: "CoreMetrics", icon: BarChart3, color: "#f97316" },
+                { name: "CoreMetrics", icon: BarChart3, color: "#cfff00" },
                 { name: "Studio Pro", icon: Palette, color: "#14b8a6" },
               ].map((item, i) => {
                 const Icon = item.icon
@@ -761,7 +761,7 @@ export function PlatformClient() {
             <a
               href="#lead-capture"
               className="px-5 py-2.5 font-medium rounded-lg text-white transition-all hover:brightness-110 text-sm"
-              style={{ backgroundColor: "#f97316" }}
+              style={{ backgroundColor: "#cfff00" }}
             >
               {tCta("sales")}
             </a>

@@ -1,0 +1,366 @@
+/* ==========================================================
+   HeroAnimation — CSS
+   Canvas fixo 1100×440px com transform: scale() responsivo
+   ========================================================== */
+
+/* ─── Wrapper (responsivo) ─── */
+.hero-animation-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* ─── Canvas fixo ─── */
+.hero-canvas {
+  position: relative;
+  width: 1100px;
+  height: 440px;
+  transform-origin: top left;
+  --mx: 0;
+  --my: 0;
+}
+
+/* ─── Shimmer sweep ─── */
+.hero-canvas::after {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background: linear-gradient(105deg, transparent 0%, transparent 40%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0.08) 55%, transparent 60%, transparent 100%);
+  transform: translateX(-130%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 200;
+}
+.is-visible::after {
+  animation: shimmerSweep 1.4s ease-in-out 5.8s forwards;
+}
+@keyframes shimmerSweep {
+  0%   { opacity: 0; transform: translateX(-130%); }
+  10%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(130%); }
+}
+
+/* ─── Parallax ─── */
+.hero-parallax {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translate(calc(var(--mx) * var(--depth) * 1px), calc(var(--my) * var(--depth) * 1px));
+  transition: transform 0.2s ease-out;
+}
+
+/* ─── Entrance base ─── */
+.hero-entrance {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ─── Entrance types ─── */
+.is-visible .slide-up          { animation: entrSlideUp var(--dur) cubic-bezier(0.16,1,0.3,1) var(--del) forwards; }
+.is-visible .fade-slide-down   { animation: entrFadeSlideDown var(--dur) cubic-bezier(0.16,1,0.3,1) var(--del) forwards; }
+.is-visible .slide-right       { animation: entrSlideRight var(--dur) cubic-bezier(0.16,1,0.3,1) var(--del) forwards; }
+.is-visible .scale-up          { animation: entrScaleUp var(--dur) cubic-bezier(0.16,1,0.3,1) var(--del) forwards; }
+.is-visible .drop-bounce       { animation: entrDropBounce var(--dur) cubic-bezier(0.34,1.56,0.64,1) var(--del) forwards; }
+.is-visible .slide-right-grand { animation: entrSlideRightGrand var(--dur) cubic-bezier(0.16,1,0.3,1) var(--del) forwards; }
+.is-visible .cascade-down      { animation: entrCascadeDown var(--dur) cubic-bezier(0.16,1,0.3,1) var(--del) forwards; }
+
+/* ─── Entrance Keyframes ─── */
+@keyframes entrSlideUp {
+  from { opacity: 0; transform: translateY(50px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes entrFadeSlideDown {
+  from { opacity: 0; transform: translateY(-30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes entrSlideRight {
+  from { opacity: 0; transform: translateX(55px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes entrScaleUp {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes entrDropBounce {
+  0%   { opacity: 0; transform: translateY(-55px); }
+  55%  { opacity: 1; transform: translateY(7px); }
+  78%  { transform: translateY(-3px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes entrSlideRightGrand {
+  0%   { opacity: 0; transform: translateX(90px) scale(1.05); }
+  55%  { opacity: 1; transform: translateX(-6px) scale(1.0); }
+  78%  { transform: translateX(2px) scale(1.0); }
+  100% { opacity: 1; transform: translateX(0) scale(1.0); }
+}
+@keyframes entrCascadeDown {
+  from { opacity: 0; transform: translateY(-20px) translateX(30px); }
+  to   { opacity: 1; transform: translateY(0) translateX(0); }
+}
+
+/* ==========================================================
+   SHARED
+   ========================================================== */
+.hero-canvas .card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.08);
+}
+
+/* ==========================================================
+   1. CODE TERMINAL  —  pos(8, 65)  w≈330
+   ========================================================== */
+.code-terminal {
+  position: absolute;
+  left: 8px; top: 65px; width: 330px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  background: #fff;
+}
+.code-header {
+  background: #5a5a6e;
+  padding: 8px 12px;
+  display: flex; gap: 5px; align-items: center;
+}
+.code-dot { width: 8px; height: 8px; border-radius: 50%; background: #8e8ea0; }
+.code-body {
+  padding: 14px 16px;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-size: 10px;
+  line-height: 1.65;
+  color: #4a4a5e;
+  white-space: pre;
+  overflow: hidden;
+}
+.code-body .kw  { color: #5c6bc0; }
+.code-body .fn  { color: #5c6bc0; }
+.code-body .str { color: #7c4dff; }
+.code-body .cmt { color: #a0a4b8; }
+.code-body .prop { color: #3d3d4e; }
+
+/* ==========================================================
+   2. AUDIO PLAYER  —  pos(30, 12)
+   ========================================================== */
+.audio-player {
+  position: absolute;
+  left: 30px; top: 12px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.08);
+}
+.play-btn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #2d3436;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.play-btn::after {
+  content: '';
+  width: 0; height: 0;
+  border-left: 8px solid #fff;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  margin-left: 2px;
+}
+.waveform { display: flex; align-items: center; gap: 2px; height: 22px; }
+.waveform span { width: 2.5px; border-radius: 2px; background: #c5e84d; display: block; }
+
+/* ==========================================================
+   3. WHATSAPP CARD  —  pos(350, 5)  w≈120
+   ========================================================== */
+.whatsapp-card {
+  position: absolute;
+  left: 350px; top: 5px; width: 120px;
+  padding: 8px 10px;
+}
+.wa-label { font-size: 9px; color: #25D366; font-weight: 500; margin-bottom: 5px; letter-spacing: 0.3px; }
+.wa-row { display: flex; align-items: center; gap: 7px; }
+.wa-icon {
+  width: 22px; height: 22px; border-radius: 50%; background: #25D366;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.wa-icon svg { width: 12px; height: 12px; fill: #fff; }
+.wa-number { font-size: 14px; font-weight: 600; color: #2d3436; }
+
+/* ==========================================================
+   4. EMAIL CARD  —  pos(500, 5)  w≈130
+   ========================================================== */
+.email-section { position: absolute; left: 500px; top: 5px; width: 130px; }
+.email-top { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; font-size: 7px; color: #90a4ae; }
+.email-dot { width: 6px; height: 6px; border-radius: 50%; background: #c5e84d; flex-shrink: 0; }
+.email-card {
+  background: #fff; border-radius: 8px; padding: 12px 10px; text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.08);
+  border: 1px solid rgba(197,232,77,0.25);
+}
+.email-avatar {
+  width: 32px; height: 32px; border-radius: 50%; background: #eceff1;
+  margin: 0 auto 6px; display: flex; align-items: center; justify-content: center;
+}
+.email-avatar svg { width: 18px; height: 18px; fill: #b0bec5; }
+.email-name { font-size: 11px; font-weight: 600; margin-bottom: 6px; color: #2d3436; }
+.email-cta {
+  display: inline-block;
+  font-size: 8px;
+  padding: 4px 10px;
+  border: 1.5px solid #2d3436;
+  border-radius: 5px;
+  color: #2d3436;
+  font-weight: 500;
+}
+
+/* ==========================================================
+   5. FLOWCHART  —  pos(385, 145)  w≈170
+   ========================================================== */
+.flowchart-card {
+  position: absolute; left: 385px; top: 145px; width: 170px;
+  background: #fff; border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07), 0 0 1px rgba(0,0,0,0.08);
+  padding: 12px;
+}
+.flow-titlebar { height: 10px; margin: 0 auto 12px; width: 50%; background: #e0e4e8; border-radius: 5px; }
+
+.flow-grid {
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  grid-template-rows: 32px 16px 32px;
+  gap: 6px;
+  align-items: center;
+  justify-items: center;
+}
+
+.flow-node {
+  width: 32px; height: 32px; border-radius: 8px; background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.flow-node svg { width: 16px; height: 16px; }
+.flow-node-wa svg { fill: #25D366; }
+.flow-node-telegram svg { fill: #0088CC; }
+.flow-node-instagram svg { fill: #E1306C; }
+.flow-node-messenger svg { fill: #0084FF; }
+
+.flow-connector { display: flex; align-items: center; justify-content: center; }
+.flow-connector-h { width: 100%; height: 2px; background: linear-gradient(90deg, #cfd8dc, #b0bec5); border-radius: 1px; }
+.flow-connector-v { width: 2px; height: 100%; background: linear-gradient(180deg, #cfd8dc, #b0bec5); border-radius: 1px; justify-self: center; }
+.flow-connector-cross { width: 6px; height: 6px; border-radius: 50%; background: #c5e84d; }
+
+/* ==========================================================
+   6. ANALYTICS  —  pos(365, 330)  w≈110
+   ========================================================== */
+.analytics-section { position: absolute; left: 365px; top: 330px; width: 110px; }
+.analytics-labels { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.analytics-labels span { display: block; height: 2px; width: 25%; background: #cfd8dc; border-radius: 1px; }
+.analytics-bars { display: flex; align-items: flex-end; gap: 3px; height: 45px; }
+.analytics-bars span { flex: 1; border-radius: 2px 2px 0 0; background: #c5e84d; }
+
+/* ==========================================================
+   7. FORM / INPUT  —  pos(490, 305)  w≈190
+   ========================================================== */
+.hero-canvas .form-card {
+  position: absolute; left: 490px; top: 305px; width: 190px;
+  padding: 10px 12px;
+}
+.form-title-lines { margin-bottom: 6px; }
+.form-title-lines span { display: block; height: 2.5px; background: #cfd8dc; border-radius: 2px; margin-bottom: 3px; }
+.form-title-lines span:first-child { width: 40%; }
+.form-title-lines span:last-child  { width: 25%; }
+.hero-canvas .form-input {
+  width: 100%;
+  border: 1.5px solid #e0e0e0; border-radius: 5px;
+  padding: 5px 8px;
+  font-size: 9px;
+  color: #b0bec5;
+  font-family: inherit;
+  background: #fff;
+}
+.form-subtitle { display: block; height: 2px; width: 30%; background: #cfd8dc; border-radius: 1px; margin: 6px 0 5px; }
+.form-tags { display: flex; gap: 6px; align-items: center; }
+.form-tag { display: flex; align-items: center; gap: 3px; font-size: 6px; color: #90a4ae; }
+.form-tag-dot { width: 5px; height: 5px; border-radius: 50%; }
+.form-tag-dot.green { background: #c5e84d; }
+.form-tag-dot.gray  { background: #cfd8dc; }
+.form-tag-line { display: block; width: 22px; height: 2px; background: #dfe6e9; border-radius: 1px; }
+
+/* ==========================================================
+   8. CHAT NOTIFICATIONS  —  pos(680, 45)  w≈150
+   ========================================================== */
+.notifications-stack {
+  position: absolute; left: 680px; top: 45px; width: 150px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.notif-card {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 10px;
+  background: #fff; border-radius: 8px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.06);
+}
+.notif-icon {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.notif-icon svg { width: 11px; height: 11px; fill: #fff; }
+.notif-whatsapp  { background: #25D366; }
+.notif-instagram { background: #E1306C; }
+.notif-messenger { background: #0084FF; }
+.notif-telegram  { background: #0088CC; }
+.notif-lines { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.notif-lines span { display: block; height: 2px; background: #dfe6e9; border-radius: 1px; }
+.notif-lines span:first-child { width: 90%; }
+.notif-lines span:last-child  { width: 60%; }
+
+/* ==========================================================
+   9. MOBILE PHONE  —  pos(855, 2)  w≈155
+   ========================================================== */
+.phone-wrapper { position: absolute; left: 855px; top: 2px; width: 155px; aspect-ratio: 9 / 18.5; }
+.phone-frame {
+  width: 100%; height: 100%;
+  background: #4a4a5e; border-radius: 22px; padding: 6px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.phone-screen {
+  width: 100%; height: 100%;
+  background: #55556a; border-radius: 17px;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+}
+.phone-notch { width: 36%; height: 3.5%; background: #4a4a5e; border-radius: 0 0 10px 10px; margin-bottom: 8%; flex-shrink: 0; }
+.phone-call-label { font-size: 11px; color: rgba(255,255,255,0.85); font-weight: 500; margin-bottom: 2px; letter-spacing: 0.3px; }
+.phone-call-sub { font-size: 7px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8%; }
+.phone-avatar {
+  width: 36%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center; margin-bottom: auto;
+}
+.phone-avatar svg { width: 45%; height: 45%; fill: rgba(255,255,255,0.5); }
+.phone-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 18% 10%; width: 100%; }
+.phone-action-btn { aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.phone-action-btn svg { width: 40%; height: 40%; }
+.phone-action-btn.small { background: rgba(255,255,255,0.1); width: 70%; justify-self: center; }
+.phone-action-btn.small svg { fill: rgba(255,255,255,0.5); }
+.phone-action-btn.accept { background: #4caf50; }
+.phone-action-btn.accept svg { fill: #fff; }
+.phone-action-btn.decline { background: #f44336; }
+.phone-action-btn.decline svg { fill: #fff; }
+
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+@media (max-width: 768px) {
+  .hero-parallax { transform: none !important; transition: none; }
+}
+
+/* ==========================================================
+   ACESSIBILIDADE
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .hero-entrance { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .hero-canvas::after { animation: none !important; }
+  .hero-parallax { transform: none !important; transition: none; }
+}

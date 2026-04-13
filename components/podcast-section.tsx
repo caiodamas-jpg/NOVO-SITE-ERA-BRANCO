@@ -123,7 +123,7 @@ export function PodcastSection() {
   const videoTitle = video?.title || "Era Uma Vez Podcast"
 
   return (
-    <section className="relative" style={{ backgroundColor: "#000000" }}>
+    <section className="relative" style={{ backgroundColor: "#2b363d" }}>
       <div className="relative w-full">
         <Image
           src="/images/era-uma-vez-podcast-banner.png"

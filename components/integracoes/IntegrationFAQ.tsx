@@ -39,7 +39,7 @@ export default function IntegrationFAQ() {
     <section className="py-20 px-6 border-t border-gray-200 bg-white">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
-          <div className="w-2 h-2 rounded-full bg-orange-500" />
+          <div className="w-2 h-2 rounded-full bg-[#cfff00]" />
           <span className="text-sm text-gray-500">FAQ</span>
         </div>
         <h2

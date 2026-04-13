@@ -92,7 +92,7 @@ export default function UraPageClient() {
           <h2 className="text-2xl md:text-3xl font-medium text-gray-900 mb-6" style={{ letterSpacing: "-0.0325em" }}>
             Aviso técnico para situações de crise
           </h2>
-          <div className="rounded-xl border border-orange-500/20 bg-orange-500/5 p-6">
+          <div className="rounded-xl border border-[#cfff00]/20 bg-[#cfff00]/5 p-6">
             <p className="text-gray-600 text-sm leading-relaxed mb-4">
               <span className="text-gray-900 font-medium">Exemplo prático:</span> "Identificamos uma instabilidade na sua região. Se este é o motivo da sua ligação, informamos que nossa equipe já está atuando. Previsão de normalização: 2 horas. Para outros assuntos, digite 1."
             </p>

@@ -394,8 +394,8 @@ export function Navbar() {
             </a>
             <a
               href="/#lead-capture"
-              className="px-4 py-2 text-[12px] font-semibold rounded-lg text-white transition-all hover:brightness-110"
-              style={{ backgroundColor: "#f97316" }}
+              className="px-4 py-2 text-[12px] font-semibold rounded-lg text-[#1a2429] transition-all hover:brightness-110"
+              style={{ backgroundColor: "#cfff00" }}
             >
               {t("ctaHeader")}
             </a>
@@ -441,8 +441,8 @@ export function Navbar() {
             <a
               href="/#lead-capture"
               onClick={() => setMobileOpen(false)}
-              className="block text-center px-4 py-2.5 text-sm font-semibold rounded-lg text-white hover:brightness-110 transition-all"
-              style={{ backgroundColor: "#f97316" }}
+              className="block text-center px-4 py-2.5 text-sm font-semibold rounded-lg text-[#1a2429] hover:brightness-110 transition-all"
+              style={{ backgroundColor: "#cfff00" }}
             >
               {t("ctaHeader")}
             </a>

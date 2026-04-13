@@ -72,7 +72,7 @@ export function Footer() {
                     href="https://www.google.com/maps/search/?api=1&query=R.+Miguel+Pascoal%2C+104+-+Jardim+do+Trevo%2C+Campinas+-+SP%2C+13041-312"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] text-gray-500 hover:text-orange-500 transition-colors mt-1"
+                    className="inline-flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#cfff00] transition-colors mt-1"
                   >
                     <MapPin className="w-3 h-3" />
                     Ver no Google Maps
@@ -104,7 +104,7 @@ export function Footer() {
                     href="https://www.google.com/maps/search/?api=1&query=Torre+Alpha+-+Av.+das+Na%C3%A7%C3%B5es+Unidas%2C+17007+-+V%C3%A1rzea+de+Baixo%2C+S%C3%A3o+Paulo+-+SP%2C+04730-090"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] text-gray-500 hover:text-orange-500 transition-colors mt-1"
+                    className="inline-flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#cfff00] transition-colors mt-1"
                   >
                     <MapPin className="w-3 h-3" />
                     Ver no Google Maps
@@ -182,7 +182,7 @@ export function Footer() {
           {/* Contato */}
           <div>
             <p className="text-gray-900 text-sm font-medium mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#cfff00]" />
               {t("contact")}
             </p>
             <div className="space-y-2.5">
