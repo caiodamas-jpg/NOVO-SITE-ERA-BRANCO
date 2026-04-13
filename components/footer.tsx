@@ -39,7 +39,7 @@ export function Footer() {
 
   return (
     <>
-    <footer className="bg-white border-t border-gray-200 px-6">
+    <footer className="bg-white border-t border-gray-200 px-6 pt-12">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-10">
           {/* Logo + endereço */}
@@ -192,7 +192,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="my-5 pt-6 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-gray-500 text-xs">{t("copyright")}</p>
           <p className="text-gray-400 text-[10px]">{t("address")}</p>
         </div>

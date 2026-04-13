@@ -16,7 +16,7 @@ export function CTASection() {
       />
 
       <div className="max-w-6xl mx-auto text-center relative z-10">
-        <h2 className="text-3xl md:text-4xl lg:text-[42px] font-medium text-white tracking-tight mb-16">
+        <h2 className="text-3xl md:text-4xl lg:text-[42px] font-medium text-white tracking-tight mb-[30px]">
           {t("heading")}
         </h2>
 
