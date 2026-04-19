@@ -10,16 +10,19 @@ import EraChatFAQ from "./EraChatFAQ"
 import RelatedPages from "./RelatedPages"
 import SubpageCTA from "./SubpageCTA"
 import { LeadCaptureModal } from "@/components/lead-capture/LeadCaptureModal"
+import RelatedBlogPosts from "@/components/shared/RelatedBlogPosts"
 import type { EraChatPage } from "@/data/era-chat-pages"
 import { getRelatedPages } from "@/data/era-chat-pages"
 
 interface EraChatSubpageClientProps {
   page: EraChatPage
+  blogTags?: string[]
 }
 
-export default function EraChatSubpageClient({ page }: EraChatSubpageClientProps) {
+export default function EraChatSubpageClient({ page, blogTags }: EraChatSubpageClientProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const related = getRelatedPages(page.relatedSlugs)
+  const effectiveBlogTags = blogTags ?? [page.slug, "chat", "atendimento"]
 
   // Split features into two groups for visual layout
   const featuresLeft = page.features.slice(0, Math.ceil(page.features.length / 2))
@@ -113,6 +116,7 @@ export default function EraChatSubpageClient({ page }: EraChatSubpageClientProps
 
       <EraChatFAQ faqs={page.faqs} />
       <RelatedPages pages={related} />
+      <RelatedBlogPosts tags={effectiveBlogTags} categoryProduct="era-chat" />
       <SubpageCTA onRequestQuote={() => setModalOpen(true)} />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />

@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer"
 import EraChatFAQ from "@/components/era-chat/EraChatFAQ"
 import { LeadCaptureModal } from "@/components/lead-capture/LeadCaptureModal"
 import RelatedBlogPosts from "@/components/shared/RelatedBlogPosts"
+import CompanySlideshow from "@/components/shared/CompanySlideshow"
 import { OmniChannelAnimation } from "@/components/ai-section"
 import { eraOmniPages, hubFaqs, comparisonData } from "@/data/era-omni-pages"
 
@@ -145,8 +146,8 @@ export default function EraOmniHubClient() {
       <RelatedBlogPosts
         tags={["omnichannel", "atendimento", "unificado"]}
         categoryProduct="era-omni"
-        title="Artigos relacionados sobre Omni"
       />
+      <CompanySlideshow />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />
     </>

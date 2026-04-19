@@ -9,14 +9,16 @@ import { Footer } from "@/components/footer"
 import EraChatFAQ from "@/components/era-chat/EraChatFAQ"
 import SubpageCTA from "@/components/era-chat/SubpageCTA"
 import { LeadCaptureModal } from "@/components/lead-capture/LeadCaptureModal"
+import RelatedBlogPosts from "@/components/shared/RelatedBlogPosts"
 import type { EraVozPage } from "@/data/era-voz-pages"
 import { getVozRelatedPages } from "@/data/era-voz-pages"
 
-interface Props { page: EraVozPage }
+interface Props { page: EraVozPage; blogTags?: string[] }
 
-export default function EraVozSubpageClient({ page }: Props) {
+export default function EraVozSubpageClient({ page, blogTags }: Props) {
   const [modalOpen, setModalOpen] = useState(false)
   const related = getVozRelatedPages(page.relatedSlugs)
+  const effectiveBlogTags = blogTags ?? [page.slug, "voz", "telefonia"]
 
   return (
     <>
@@ -88,6 +90,7 @@ export default function EraVozSubpageClient({ page }: Props) {
       </section>
 
       <EraChatFAQ faqs={page.faqs} />
+      <RelatedBlogPosts tags={effectiveBlogTags} categoryProduct="era-voz" />
       <SubpageCTA onRequestQuote={() => setModalOpen(true)} />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />

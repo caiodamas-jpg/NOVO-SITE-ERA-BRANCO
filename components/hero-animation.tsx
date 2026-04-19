@@ -11,6 +11,14 @@ const WaPhoneSvg = () => (
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.57-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/></svg>
 )
 
+const WhatsappLogo = ({ size }: { size: number }) => (
+  <img src="/whatsapp-icon.svg" alt="WhatsApp" width={size} height={size} style={{ display: "block", width: size, height: size }} />
+)
+
+const MulherTelefoneLogo = ({ size }: { size: number }) => (
+  <img src="/mulher-telefone.svg" alt="" width={size} height={size} style={{ display: "block", width: size, height: size }} />
+)
+
 const PersonSvg = () => (
   <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
 )
@@ -117,17 +125,17 @@ export function HeroAnimation() {
               <span className="code-dot" /><span className="code-dot" /><span className="code-dot" />
             </div>
             <div className="code-body">
-              <span className="kw">const</span>{" "}<span className="prop">opcoesDeChamada</span>{" = {\n"}
-              {"  "}<span className="prop">numeroOrigem</span>{": "}<span className="str">{`'+5511987654321'`}</span>{", "}<span className="cmt">{"// Seu numero que"}</span>{"\n"}
-              {"  "}<span className="cmt">iniciara a chamada</span>{"\n"}
-              {"  "}<span className="prop">numeroDestino</span>{": "}<span className="str">{`'+5511998765432'`}</span>{", "}<span className="cmt">{"// Numero do"}</span>{"\n"}
-              {"  "}<span className="cmt">destinatario da chamada</span>{"\n"}
-              {"  "}<span className="prop">urlWebhook</span>{": "}<span className="str">{`'https://meuservidor.com/webhook'`}</span>{" "}<span className="cmt">{"// URL para"}</span>{"\n"}
-              {"  "}<span className="cmt">receber eventos da chamada</span>{"\n"}
+              <span className="kw">const</span>{" "}<span className="prop">callOptions</span>{" = {\n"}
+              {"  "}<span className="prop">sourceNumber</span>{": "}<span className="str">{`'+5511987654321'`}</span>{", "}<span className="cmt">{"// Your number that"}</span>{"\n"}
+              {"  "}<span className="cmt">will initiate the call</span>{"\n"}
+              {"  "}<span className="prop">destinationNumber</span>{": "}<span className="str">{`'+5511998765432'`}</span>{", "}<span className="cmt">{"// Recipient number"}</span>{"\n"}
+              {"  "}<span className="cmt">of the call</span>{"\n"}
+              {"  "}<span className="prop">webhookUrl</span>{": "}<span className="str">{`'https://myserver.com/webhook'`}</span>{" "}<span className="cmt">{"// URL to"}</span>{"\n"}
+              {"  "}<span className="cmt">receive call events</span>{"\n"}
               {"};\n\n"}
-              <span className="kw">function</span>{" "}<span className="fn">iniciarChamada</span>{"(opcoes) {\n"}
-              {"  vozClient.chamadas.criar(opcoes)\n"}
-              {"    .then(resposta => {"}
+              <span className="kw">function</span>{" "}<span className="fn">initiateCall</span>{"(options) {\n"}
+              {"  voiceClient.calls.create(options)\n"}
+              {"    .then(response => {"}
             </div>
           </div>
         </div>
@@ -151,7 +159,7 @@ export function HeroAnimation() {
           <div className="flowchart-card">
             <div className="flow-titlebar" />
             <div className="flow-grid">
-              <div className="flow-node flow-node-wa"><WaPhoneSvg /></div>
+              <div className="flow-node flow-node-logo"><WhatsappLogo size={28} /></div>
               <div className="flow-connector flow-connector-h" />
               <div className="flow-node flow-node-instagram"><InstagramSvg /></div>
 
@@ -173,7 +181,7 @@ export function HeroAnimation() {
           <div className="whatsapp-card card">
             <div className="wa-label">WhatsApp</div>
             <div className="wa-row">
-              <div className="wa-icon"><WaPhoneSvg /></div>
+              <div className="wa-icon-logo"><WhatsappLogo size={26} /></div>
               <span className="wa-number">347892</span>
             </div>
           </div>
@@ -189,7 +197,7 @@ export function HeroAnimation() {
               <span>login@minhaera.com</span>
             </div>
             <div className="email-card">
-              <div className="email-avatar"><PersonSvg /></div>
+              <div className="email-avatar email-avatar-logo"><MulherTelefoneLogo size={36} /></div>
               <div className="email-name">Ola Marina!</div>
               <span className="email-cta">Experimente gratis</span>
             </div>
@@ -202,7 +210,7 @@ export function HeroAnimation() {
         <div className="hero-entrance cascade-down" style={{ "--del": "2.6s", "--dur": "0.85s" } as CSSVars}>
           <div className="notifications-stack">
             <div className="notif-card">
-              <div className="notif-icon notif-whatsapp"><WaPhoneSvg /></div>
+              <div className="notif-icon-logo"><WhatsappLogo size={20} /></div>
               <div className="notif-lines"><span /><span /></div>
             </div>
             <div className="notif-card">
@@ -218,7 +226,7 @@ export function HeroAnimation() {
               <div className="notif-lines"><span /><span /></div>
             </div>
             <div className="notif-card">
-              <div className="notif-icon notif-whatsapp"><WaPhoneSvg /></div>
+              <div className="notif-icon-logo"><WhatsappLogo size={20} /></div>
               <div className="notif-lines"><span /><span /></div>
             </div>
           </div>
@@ -262,7 +270,7 @@ export function HeroAnimation() {
                 <div className="phone-notch" />
                 <div className="phone-call-label">Chamada Recebida</div>
                 <div className="phone-call-sub">ERA</div>
-                <div className="phone-avatar"><PersonSvg /></div>
+                <div className="phone-avatar phone-avatar-logo"><MulherTelefoneLogo size={60} /></div>
                 <div className="phone-actions">
                   <div className="phone-action-btn small"><PersonSvg /></div>
                   <div className="phone-action-btn small"><PersonSvg /></div>

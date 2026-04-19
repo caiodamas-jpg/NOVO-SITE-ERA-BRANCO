@@ -143,13 +143,11 @@ export default function EraChatHubClient() {
         </div>
       </section>
 
-      <CompanySlideshow />
-
       <RelatedBlogPosts
         tags={["whatsapp", "chatbot", "atendimento", "ia"]}
         categoryProduct="era-chat"
-        title="Artigos relacionados sobre Chat"
       />
+      <CompanySlideshow />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />
     </>

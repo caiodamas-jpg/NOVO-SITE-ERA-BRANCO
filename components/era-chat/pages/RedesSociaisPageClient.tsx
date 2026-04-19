@@ -6,6 +6,7 @@ import { ChevronRight, Check } from "lucide-react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import BlogAndSlideshow from "@/components/shared/BlogAndSlideshow"
 import EraChatFAQ from "../EraChatFAQ"
 import RelatedPages from "../RelatedPages"
 import SubpageCTA from "../SubpageCTA"
@@ -202,6 +203,7 @@ export default function RedesSociaisPageClient() {
 
       <EraChatFAQ faqs={pageData.faqs} />
       <RelatedPages pages={related} />
+      <BlogAndSlideshow tags={["redes-sociais", "chat", "atendimento"]} categoryProduct="era-chat" />
       <SubpageCTA onRequestQuote={() => setModalOpen(true)} />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />

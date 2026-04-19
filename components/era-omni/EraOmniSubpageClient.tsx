@@ -9,14 +9,16 @@ import { Footer } from "@/components/footer"
 import EraChatFAQ from "@/components/era-chat/EraChatFAQ"
 import SubpageCTA from "@/components/era-chat/SubpageCTA"
 import { LeadCaptureModal } from "@/components/lead-capture/LeadCaptureModal"
+import RelatedBlogPosts from "@/components/shared/RelatedBlogPosts"
 import type { EraOmniPage } from "@/data/era-omni-pages"
 import { getOmniRelatedPages } from "@/data/era-omni-pages"
 
-interface Props { page: EraOmniPage }
+interface Props { page: EraOmniPage; blogTags?: string[] }
 
-export default function EraOmniSubpageClient({ page }: Props) {
+export default function EraOmniSubpageClient({ page, blogTags }: Props) {
   const [modalOpen, setModalOpen] = useState(false)
   const related = getOmniRelatedPages(page.relatedSlugs)
+  const effectiveBlogTags = blogTags ?? [page.slug, "omnichannel", "atendimento"]
 
   return (
     <>
@@ -77,6 +79,7 @@ export default function EraOmniSubpageClient({ page }: Props) {
       </section>
 
       <EraChatFAQ faqs={page.faqs} />
+      <RelatedBlogPosts tags={effectiveBlogTags} categoryProduct="era-omni" />
       <SubpageCTA onRequestQuote={() => setModalOpen(true)} />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />

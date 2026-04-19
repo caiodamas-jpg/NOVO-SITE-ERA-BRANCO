@@ -48,13 +48,13 @@ export function WhatsAppFloatingButton() {
       openWhatsApp(localStorage.getItem("era_wpp_name") || "")
       return
     }
-    const gatePassed = localStorage.getItem("era_gate_passed") === "true"
+    const gatePassed = localStorage.getItem("era_wpp_gate_passed") === "true"
     setGateStep(gatePassed ? "form" : "gate")
     setIsOpen(true)
   }
 
   const handleGateYes = () => {
-    localStorage.setItem("era_gate_passed", "true")
+    localStorage.setItem("era_wpp_gate_passed", "true")
     setGateStep("form")
   }
 

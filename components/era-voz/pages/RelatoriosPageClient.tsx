@@ -6,6 +6,7 @@ import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import BlogAndSlideshow from "@/components/shared/BlogAndSlideshow"
 import { ProductDirectionSection } from "@/components/product-direction-section"
 import EraChatFAQ from "@/components/era-chat/EraChatFAQ"
 import SubpageCTA from "@/components/era-chat/SubpageCTA"
@@ -86,6 +87,7 @@ export default function RelatoriosPageClient() {
       </section>
 
       <EraChatFAQ faqs={pageData.faqs} />
+      <BlogAndSlideshow tags={["relatorios", "voz", "telefonia"]} categoryProduct="era-voz" />
       <SubpageCTA onRequestQuote={() => setModalOpen(true)} />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />

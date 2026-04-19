@@ -187,6 +187,9 @@
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .wa-icon svg { width: 12px; height: 12px; fill: #fff; }
+.wa-icon-logo {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
 .wa-number { font-size: 14px; font-weight: 600; color: #2d3436; }
 
 /* ==========================================================
@@ -205,6 +208,10 @@
   margin: 0 auto 6px; display: flex; align-items: center; justify-content: center;
 }
 .email-avatar svg { width: 18px; height: 18px; fill: #b0bec5; }
+.email-avatar-logo {
+  width: 40px; height: 40px; background: transparent; overflow: hidden;
+}
+.email-avatar-logo img { width: 36px; height: 36px; object-fit: contain; }
 .email-name { font-size: 11px; font-weight: 600; margin-bottom: 6px; color: #2d3436; }
 .email-cta {
   display: inline-block;
@@ -243,6 +250,8 @@
 }
 .flow-node svg { width: 16px; height: 16px; }
 .flow-node-wa svg { fill: #25D366; }
+.flow-node-logo { background: transparent; box-shadow: none; }
+.flow-node-logo img { width: 28px; height: 28px; }
 .flow-node-telegram svg { fill: #0088CC; }
 .flow-node-instagram svg { fill: #E1306C; }
 .flow-node-messenger svg { fill: #0084FF; }
@@ -311,6 +320,10 @@
 .notif-instagram { background: #E1306C; }
 .notif-messenger { background: #0084FF; }
 .notif-telegram  { background: #0088CC; }
+.notif-icon-logo {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.notif-icon-logo img { width: 20px; height: 20px; }
 .notif-lines { flex: 1; display: flex; flex-direction: column; gap: 3px; }
 .notif-lines span { display: block; height: 2px; background: #dfe6e9; border-radius: 1px; }
 .notif-lines span:first-child { width: 90%; }
@@ -339,6 +352,8 @@
   display: flex; align-items: center; justify-content: center; margin-bottom: auto;
 }
 .phone-avatar svg { width: 45%; height: 45%; fill: rgba(255,255,255,0.5); }
+.phone-avatar-logo { background: #fff; overflow: hidden; }
+.phone-avatar-logo img { width: 90%; height: 90%; object-fit: contain; }
 .phone-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 18% 10%; width: 100%; }
 .phone-action-btn { aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .phone-action-btn svg { width: 40%; height: 40%; }

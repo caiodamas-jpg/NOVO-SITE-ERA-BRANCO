@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer"
 import EraChatFAQ from "@/components/era-chat/EraChatFAQ"
 import { LeadCaptureModal } from "@/components/lead-capture/LeadCaptureModal"
 import RelatedBlogPosts from "@/components/shared/RelatedBlogPosts"
+import CompanySlideshow from "@/components/shared/CompanySlideshow"
 import { eraVozPages, hubFeatures } from "@/data/era-voz-pages"
 
 const hubFaqs = [
@@ -134,8 +135,8 @@ export default function EraVozHubClient() {
       <RelatedBlogPosts
         tags={["call-center", "pabx", "telefonia", "ura"]}
         categoryProduct="era-voz"
-        title="Artigos relacionados sobre Voz"
       />
+      <CompanySlideshow />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />
     </>

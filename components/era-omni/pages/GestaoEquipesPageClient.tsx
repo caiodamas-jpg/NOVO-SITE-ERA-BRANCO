@@ -5,6 +5,7 @@ import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import BlogAndSlideshow from "@/components/shared/BlogAndSlideshow"
 import EraChatFAQ from "@/components/era-chat/EraChatFAQ"
 import SubpageCTA from "@/components/era-chat/SubpageCTA"
 import { LeadCaptureModal } from "@/components/lead-capture/LeadCaptureModal"
@@ -83,6 +84,7 @@ export default function GestaoEquipesPageClient() {
       </section>
 
       <EraChatFAQ faqs={pageData.faqs} />
+      <BlogAndSlideshow tags={["gestao-equipes", "omnichannel", "atendimento"]} categoryProduct="era-omni" />
       <SubpageCTA onRequestQuote={() => setModalOpen(true)} />
       <Footer />
       <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} context="planos" />

@@ -1,14 +1,14 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Check, ChevronRight, ExternalLink, Loader2 } from "lucide-react"
-import Image from "next/image"
+import { Check, ChevronRight, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import StepTwo from "@/components/lead-capture/StepTwo"
+import LeadGate from "@/components/lead-capture/LeadGate"
 import { products, homeHighlights } from "@/data/plans"
 import { calculateICPScore } from "@/lib/icp-score"
 import { getRecommendation } from "@/lib/recommendation"
@@ -31,10 +31,15 @@ const socialLinks = [
 export default function ObrigadoClient() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const formRef = useRef<HTMLDivElement>(null)
   const leadId = typeof window !== "undefined" ? localStorage.getItem("era_lead_id") : null
 
   useEffect(() => {
-    // No extra events here — lead_form_step1 is fired before redirect
+    // Scroll suave até o form após 600ms (depois da animação inicial)
+    const timer = setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, 800)
+    return () => clearTimeout(timer)
   }, [])
 
   const handleStepTwo = useCallback(async (data: StepTwoData) => {
@@ -91,36 +96,65 @@ export default function ObrigadoClient() {
     <>
       <Navbar />
 
-      {/* Hero agradecimento */}
-      <section className="pt-32 pb-12 px-6 bg-white">
+      {/* HERO — reframed como "Quase lá" + progresso + benefícios */}
+      <section className="pt-28 pb-10 px-6 bg-white">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
-            <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-6" style={{ backgroundColor: "#2b363d" }}>
-              <Check className="w-8 h-8 text-[#1a1a1a]" />
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            {/* Badge de confirmação discreto */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#cfff00]/20 border border-[#cfff00] mb-6">
+              <Check className="w-3.5 h-3.5 text-[#1a2429]" strokeWidth={3} />
+              <span className="text-[11px] font-semibold text-[#1a2429] uppercase tracking-wider">
+                Dados recebidos — estamos preparando seu atendimento
+              </span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-medium text-gray-900 mb-4" style={{ letterSpacing: "-0.0325em", lineHeight: 1.1 }}>
-              Obrigado pelo seu contato!
+
+            {/* Título principal de continuação */}
+            <h1 className="text-3xl md:text-5xl font-medium text-gray-900 mb-4" style={{ letterSpacing: "-0.0325em", lineHeight: 1.1 }}>
+              Quase lá! Falta só <span className="text-[#2b363d]">1 passo</span> para sua proposta personalizada.
             </h1>
-            <p className="text-gray-500 text-base max-w-lg mx-auto mb-2">
-              Recebemos seus dados com sucesso. Um especialista ERA entrará em contato em breve.
+
+            <p className="text-gray-600 text-base md:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+              Enquanto nossa equipe analisa seu contato, conte mais sobre sua operação pra receber uma proposta <strong className="text-gray-900">sob medida</strong> — mais rápida e precisa.
             </p>
-            <p className="text-gray-500 text-sm">Atendimento de segunda a sexta, das 9h às 17h.</p>
+
+            {/* Barra de progresso */}
+            <div className="max-w-md mx-auto mb-10">
+              <div className="flex items-center justify-between text-xs font-medium text-gray-600 mb-2">
+                <span>Etapa 2 de 2</span>
+                <span className="text-[#2b363d] font-semibold">50%</span>
+              </div>
+              <div className="h-2 rounded-full bg-gray-200 overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: "50%" }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                  className="h-full rounded-full bg-[#cfff00]"
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Step 2 — personalização opcional */}
-      <section className="py-12 px-6 border-t border-gray-200" style={{ backgroundColor: "#f9fafb" }}>
-        <div className="max-w-lg mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-            <div className="rounded-xl border border-[#cfff00]/20 bg-white p-6">
-              <div className="text-center mb-6">
-                <h2 className="text-lg font-medium text-gray-900 mb-2">Quer um contato mais personalizado?</h2>
-                <p className="text-gray-500 text-xs leading-relaxed">
-                  Preencha as informações abaixo e nossa equipe vai preparar uma proposta sob medida para a sua operação. É rápido — menos de 1 minuto.
+      {/* FORM (StepTwo) em destaque, com gate CNPJ */}
+      <section ref={formRef} className="pt-8 pb-20 px-6 border-t border-gray-200" style={{ backgroundColor: "#f4f5f7" }}>
+        <div className="max-w-2xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
+            <div className="rounded-2xl border border-[#cfff00]/40 bg-white p-8 md:p-10 shadow-xl">
+              <div className="text-center mb-8">
+                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#2b363d] mb-3">
+                  Personalize sua proposta
+                </span>
+                <h2 className="text-2xl md:text-3xl font-medium text-gray-900 mb-3" style={{ letterSpacing: "-0.0325em", lineHeight: 1.15 }}>
+                  Conte como funciona sua operação
+                </h2>
+                <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-md mx-auto">
+                  Leva menos de 1 minuto. Cada campo ajuda nosso time a preparar uma proposta mais assertiva pra você.
                 </p>
               </div>
-              <StepTwo onSubmit={handleStepTwo} onSkip={handleSkip} loading={loading} />
+              <LeadGate>
+                <StepTwo onSubmit={handleStepTwo} onSkip={handleSkip} loading={loading} />
+              </LeadGate>
             </div>
           </motion.div>
         </div>
