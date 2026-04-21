@@ -141,22 +141,22 @@ export function Hero3DStage() {
             />
             <HeroAnimation />
           </div>
-
-          <FeatureCardsSection />
-          <LogoCloud />
-          <PodcastSection />
-          <AISection />
-          <PlanosHomeSection />
-          <LeadCaptureSection />
-          <ProductDirectionSection />
-          <IntegrationOrbit />
-          <CoExSection />
-          <BlogSection />
-          <EventsSection />
-          <CTASection />
-          <Footer />
         </div>
       </section>
+
+      <FeatureCardsSection />
+      <LogoCloud />
+      <PodcastSection />
+      <AISection />
+      <PlanosHomeSection />
+      <LeadCaptureSection />
+      <ProductDirectionSection />
+      <IntegrationOrbit />
+      <CoExSection />
+      <BlogSection />
+      <EventsSection />
+      <CTASection />
+      <Footer />
     </>
   )
 }

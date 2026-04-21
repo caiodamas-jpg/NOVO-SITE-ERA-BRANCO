@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
-import { Menu, X, ChevronDown, ChevronRight, MessageSquare, Phone, Radio, Layers, Zap, Users, BarChart3, Code2, ShoppingBag, ClipboardCheck, Mail, Smartphone, Send, Globe, Bot, Headphones, PhoneCall, Activity, FileText, Settings, Ticket, PieChart, Webhook, Store, Star, Heart, Building2 } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronRight, MessageSquare, Phone, Radio, Layers, Zap, Users, BarChart3, ShoppingBag, Send, Globe, Bot, Headphones, PhoneCall, Activity, FileText, Settings, PieChart, Webhook, Star, Heart, Building2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 
@@ -262,10 +262,6 @@ export function Navbar() {
           { label: t("chatbot"), href: "/era-chat/chatbot", icon: <Bot className={iconSize} />, desc: t("descChatbot"), ready: true },
           { label: t("iaGenerativa"), href: "/era-chat/ia-generativa", icon: <Zap className={iconSize} />, desc: t("descIA"), ready: true },
           { label: t("livechat"), href: "/era-chat/livechat", icon: <MessageSquare className={iconSize} />, desc: t("descLivechat"), ready: true },
-
-          { label: t("sms"), href: "/era-chat/sms", icon: <Smartphone className={iconSize} />, desc: t("descSMS"), ready: true },
-          { label: t("rcs"), href: "/era-chat/rcs", icon: <Radio className={iconSize} />, desc: t("descRCS"), ready: true },
-          { label: t("emailMarketing"), href: "/era-chat/email", icon: <Mail className={iconSize} />, desc: t("descEmail"), ready: true },
         ],
       },
       {
@@ -300,36 +296,6 @@ export function Navbar() {
     },
   }
 
-  // ── Plataforma ──
-  const plataformaMenu: MegaMenuData = {
-    label: t("plataforma"),
-    groups: [
-      {
-        title: t("grpAutomacao"),
-        items: [
-          { label: t("flows"), href: "/plataforma/flows", icon: <Zap className={iconSize} />, desc: t("descFlows"), ready: true },
-          { label: t("crm"), href: "/plataforma/crm", icon: <Users className={iconSize} />, desc: t("descCRM"), ready: true },
-          { label: t("tickets"), href: "/plataforma/tickets", icon: <Ticket className={iconSize} />, desc: t("descTickets"), ready: true },
-        ],
-      },
-      {
-        title: t("grpIntegracoes"),
-        items: [
-          { label: t("integracoes"), href: "/integrations", icon: <Settings className={iconSize} />, desc: t("descIntegracoes"), ready: true },
-          { label: t("apiPortal"), href: "/plataforma/api", icon: <Code2 className={iconSize} />, desc: t("descAPI"), ready: true },
-          { label: t("marketplaceItem"), href: "/plataforma/marketplace", icon: <Store className={iconSize} />, desc: t("descMarketplace"), ready: true },
-        ],
-      },
-      {
-        title: t("grpDados"),
-        items: [
-          { label: t("analytics"), href: "/plataforma/analytics", icon: <PieChart className={iconSize} />, desc: t("descAnalytics"), ready: true },
-          { label: t("surveys"), href: "/plataforma/surveys", icon: <ClipboardCheck className={iconSize} />, desc: t("descSurveys"), ready: true },
-        ],
-      },
-    ],
-  }
-
   // ── Recursos ──
   const recursosMenu: MegaMenuData = {
     label: t("recursos"),
@@ -359,7 +325,7 @@ export function Navbar() {
     ],
   }
 
-  const menus = [solucoesMenu, plataformaMenu, recursosMenu]
+  const menus = [solucoesMenu, recursosMenu]
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200/80 bg-white">
